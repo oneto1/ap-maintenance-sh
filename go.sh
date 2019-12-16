@@ -1,8 +1,8 @@
 #! /bin/bash
 
-filename=sedtest
+filename=data
 
-grep 'MD'  $filename  |sed 's/^.*MD//'   | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed "s/08-411.*//g"|  sed '2s/^/明德: \n/'
+grep 'MD'  $filename  |sed 's/^.*MD//'   | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed "s/08-411.*//g"|  sed '1s/^/明德: \n/'
 
 grep 'NY'  $filename |sed 's/^.*NY//'  | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed '1s/^/南院: \n/'
 
