@@ -1,16 +1,26 @@
 #! /bin/bash
 
-filename=data
+filename='cap'
 
-grep 'MD'  $filename  |sed 's/^.*MD//'   | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed "s/08-411.*//g"|  sed '1s/^/明德: \n/'
+echo "starting work ..."
 
-grep 'NY'  $filename |sed 's/^.*NY//'  | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed '1s/^/南院: \n/'
+if [ -r $filename ]
+then
+	rm -f  $filename
+fi
 
-grep 'BJ'  $filename |sed 's/^.*BJ//'  | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed '1s/^/滨江: \n/'
+sudo minicom -C $filename
 
-grep 'QM'  $filename |sed 's/^.*QM//'  | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed '1s/^/亲民: \n/'
+#grep 'MD'  $filename  |sed 's/^.*MD//'   | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' |sed "s/08-411.*$//g" |sed "s/ //g" | sed '$!N;s/\n/\t/' |sed '$!N;s/\n/\t/' |   sed '1s/^/明德: \n/'
 
-# grep 'MD'  sedtest  |sed 's/^.*MD//'   | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed "s/08-411.*/\t/g"|  sed '2s/^/明德: \n/'
+grep 'NY'  $filename |sed 's/^.*NY//'  | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | sort | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed '1s/^/南院: \n/'
 
-grep 'XH'  $filename |sed 's/^.*XH//'  | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed '1s/^/学海: \n/'
+grep 'BJ'  $filename |sed 's/^.*BJ//'  | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' |sort | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed '1s/^/滨江: \n/'
 
+grep 'QM'  $filename |sed 's/^.*QM//'  | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | sort | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed '1s/^/亲民: \n/'
+
+grep 'MD'  $filename  |sed 's/^.*MD//'   | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/'|sed "s/08-411.*//" | sed  '/^ *$/d'|  sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'|  sed '1s/^/明德: \n/'
+
+grep 'XH'  $filename |sed 's/^.*XH//'  | sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' |sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' |sort | sed '$!N;s/\n/\t/' |  sed '$!N;s/\n/\t/'| sed '1s/^/学海: \n/'
+
+rm -f cap
