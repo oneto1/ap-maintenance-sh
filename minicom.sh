@@ -4,6 +4,12 @@ filename='cap'
 
 echo "starting work ..."
 
+if [ -r $filename ]
+then
+     rm -f  $filename
+fi
+
+sudo minicom -C $filename
 
 grep 'NY'  $filename |sed 's/^.*NY//'  | \
     sed 's/ap.*//'  | sed 's/\(.*\)\(.\{6\}\)/\1/g' | \
@@ -34,4 +40,6 @@ grep 'XH'  $filename |sed 's/^.*XH//'  | \
     sed '/^[A-Z]/d' |sed 's/ //' |sed 's/\(.*\)\(.\{7\}\)/\1/' | \
     sort -n | sed '$!N;s/\n/\t/' | \
     sed '$!N;s/\n/\t/'| sed '1s/^/学海: \n/'
+
+rm -f $filename
 
